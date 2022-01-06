@@ -1,0 +1,30 @@
+clc
+close all
+
+% x = ga(fun,nvars A, b, Aeq, lb, ub, nonlcon, intcon) 
+% nvars = 7 ; %ταχυτητα κοπης, προωση, βαθος, ειδος πλακιδιου, γωνια κοπης
+% Ανεξαρτητες μεταβλητες
+% n = ταχυτητα κοπης
+% feed = προωση
+% D = βαθος κοπης
+% It1 or It2 = ειδος πλακιδιου
+% A1 or A2 = γωνια κοπης 
+
+%linear inequality contraints
+%A = %real matrix Mxnvars 
+%b = %real vector M - element 
+
+% linear equality constraints
+%Aeq = %real matrix
+%beq = %real vector
+
+%Boundaries
+lb  = [1000 40 1 0 0 0 0 ]; %lb = %real vector or array of doubles
+ub =  [3000 80 3 1 1 1 1 ]; %ub = %real vector or array of doubles
+A = [ ] ; 
+b = [ ];
+Aeq=[];
+beq = [];
+
+
+x = ga(net_call,7,A,b,Aeq,beq) ;
