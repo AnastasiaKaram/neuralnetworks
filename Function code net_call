@@ -1,0 +1,4 @@
+function f = net_call(n,feed,D,It1,It2,A1,A2)
+load('mat_file_neural', '-mat' );
+f = sim(net,[n,feed,D,It1,It2,A1,A2]') ;
+end
