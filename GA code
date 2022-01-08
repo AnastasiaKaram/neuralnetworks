@@ -1,7 +1,7 @@
 clc
 close all
 
-% x = ga(fun,nvars A, b, Aeq, lb, ub, nonlcon, intcon) 
+%x = ga(fun,nvars A, b, Aeq, lb, ub, nonlcon, intcon) 
 % nvars = 7 ; %ταχυτητα κοπης, προωση, βαθος, ειδος πλακιδιου, γωνια κοπης
 % Ανεξαρτητες μεταβλητες
 % n = ταχυτητα κοπης
@@ -18,14 +18,34 @@ close all
 %Aeq = %real matrix
 %beq = %real vector
 
-%Boundaries
+% Boundaries
 lb  = [1000 40 1 0 0 0 0 ]; %lb = %real vector or array of doubles
 ub =  [3000 80 3 1 1 1 1 ]; %ub = %real vector or array of doubles
-A = [ ] ; 
-b = [ ];
-Aeq=[];
-beq = [];
 
+Aeq = [ 0 0 0  1 1 0 0] ;
+beq = [1] ;
+A = [ 0 0 0 0 0 1 1 ];
+b = [1];
+%A = [ 0 0 0 0 1 1 0 0 ] ;
+%A(:, 6) =1;
+ 
+% equality 1 : It1 + It2 = 1
+% equality 2 : A1 + A2 = 1 
 
-x = ga(net_call,7,A,b,Aeq,beq) ;
-h 
+% default options
+options = optimoptions('ga');
+intcon = [ 4 5 ];
+
+%stop criteria
+options = optimoptions('ga','MaxGenerations', 200);
+% options = optimoptions(options,'MaxGenerations', MaxGenerationsVal); % number of generations
+% options = optimoptions(options,'MaxTime', MaxTimeVal); % time limit
+% options = optimoptions(options,'FitnessLimit', FitnessLimitVal); % fitness limit
+% options = optimoptions(options,'MaxStallGenerations', MaxStallGenerationsVal); % stall generation
+% options = optimoptions(options,'MaxStallTime', MaxStallTimeVal); % stall time limit
+% options = optimoptions(options,'FunctionTolerance', FunctionToleranceVal); % function tolerance
+% options = optimoptions(options,'ConstraintTolerance', ConstraintToleranceVal); % constraint tolerance
+
+[x, ~, exitflag, output]  = ga(@net_call,7,A,b,Aeq,beq, lb, ub,[], [], options) 
+
+x  = generations200 ; 
