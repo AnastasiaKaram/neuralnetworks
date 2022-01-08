@@ -28,3 +28,4 @@ beq = [];
 
 
 x = ga(net_call,7,A,b,Aeq,beq) ;
+h 
